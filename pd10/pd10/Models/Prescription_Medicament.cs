@@ -13,4 +13,9 @@ public class Prescription_Medicament
     public int Dose { get; set; }
     [Required]
     public string Details { get; set; }
+  
+    [ForeignKey(nameof(IdPrescription))]
+    public Prescription Prescription { get; set; } = null!;
+    [ForeignKey(nameof(IdMedicament))]
+    public Medicament Medicament { get; set; } = null!;
 }
