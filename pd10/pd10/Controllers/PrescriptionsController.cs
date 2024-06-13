@@ -45,7 +45,7 @@ public class PrescriptionsController : ControllerBase
                 IdPatient = request.Patient.IdPatient,
                 FirstName = request.Patient.FirstName,
                 LastName = request.Patient.LastName,
-                Birthdate = DateTime.Now
+                Birthdate = request.Patient.Birthdate
             };
             
             prescription = await _dbService.AddPrescription(newpatient, request.IdDoctor, request.AddPrescriptionDto);

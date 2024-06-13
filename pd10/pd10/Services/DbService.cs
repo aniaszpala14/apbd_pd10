@@ -30,6 +30,8 @@ public class DbService : IDbService
                 IdMedicament = x.IdMedicament,
             }).ToList()
         };
+        _context.Prescriptions.Add(result);
+        await _context.SaveChangesAsync();
         
         return result;
     }
@@ -71,7 +73,6 @@ public class DbService : IDbService
                     Doctor = pr.Doctor
                 }).ToList()
             }).FirstOrDefaultAsync();
-
         return result;
     }
 
