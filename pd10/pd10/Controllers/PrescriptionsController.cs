@@ -37,22 +37,7 @@ public class PrescriptionsController : ControllerBase
             }
         }
 
-        Prescription prescription = null;
-        if(!await _dbService.DoesPatientExist(request.Patient.IdPatient))
-        {
-            var newpatient = new Patient
-            {
-                IdPatient = request.Patient.IdPatient,
-                FirstName = request.Patient.FirstName,
-                LastName = request.Patient.LastName,
-                Birthdate = request.Patient.Birthdate
-            };
-            
-            prescription = await _dbService.AddPrescription(newpatient, request.IdDoctor, request.AddPrescriptionDto);
-            return Ok(prescription);
-        }else
-        { prescription = await _dbService.AddPrescription(request.Patient, request.IdDoctor, request.AddPrescriptionDto); }
-
+        var prescription = await _dbService.AddPrescription(request.Patient, request.IdDoctor, request.AddPrescriptionDto); 
         return Ok(prescription);
     }
 

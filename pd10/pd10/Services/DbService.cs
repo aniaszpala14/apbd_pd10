@@ -18,7 +18,21 @@ public class DbService : IDbService
     
     public async Task<Prescription> AddPrescription(Patient patient,int IdDoctor,AddPrescriptionDto adprescriptionDto)
     {
-        
+
+        if (!await DoesPatientExist(patient.IdPatient))
+        {
+            var newpatient = new Patient
+            {
+                IdPatient = patient.IdPatient,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Birthdate = patient.Birthdate
+            };
+            _context.Patients.Add(newpatient);
+            await _context.SaveChangesAsync();
+        }
+
+
         var result = new Prescription
         {
             Date = adprescriptionDto.Date,
@@ -35,6 +49,8 @@ public class DbService : IDbService
         
         return result;
     }
+    
+    
     
     public async Task<bool> DoesPatientExist(int id)
     {
