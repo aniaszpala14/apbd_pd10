@@ -86,9 +86,14 @@ public class DbService : IDbService
                         Name = pm.Medicament.Name,
                         Description = pm.Medicament.Description
                     }).ToList(),
-                    Doctor = pr.Doctor
-                }).ToList()
+                    Doctor = new DoctorDto
+                    {
+                        IdDoctor = pr.Doctor.IdDoctor,
+                        FirstName = pr.Doctor.FirstName,
+                    }
+                }).ToList() 
             }).FirstOrDefaultAsync();
+                
         return result;
     }
 
